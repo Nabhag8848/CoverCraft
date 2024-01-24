@@ -31,7 +31,7 @@ export function useDrafts({ username }: { username: string }) {
 }
 
 export function getListOfDrafts(data: any) {
-  const drafts = data.data.user.publications.edges[0].node.drafts.edges.map(
+  const drafts = data.user.publications.edges[0].node.drafts.edges.map(
     (draft: any) => {
       const value = draft.node;
       return { id: value.id, title: value.title, slug: value.slug };
