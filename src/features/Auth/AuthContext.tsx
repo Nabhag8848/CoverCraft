@@ -2,8 +2,7 @@ import { emit, on } from "@create-figma-plugin/utilities";
 import { createContext, h } from "preact";
 import { PropsWithChildren } from "preact/compat";
 import { StateUpdater, useContext, useState } from "preact/hooks";
-import { useCallback, useEffect } from "react";
-import { GetAccessToken, Init } from "../../types";
+import { GetAccessToken } from "../../types";
 
 interface ContextValue {
   token: string;

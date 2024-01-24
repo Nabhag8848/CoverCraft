@@ -1,5 +1,5 @@
 import { once, showUI, on, emit } from "@create-figma-plugin/utilities";
-import { CloseHandler, GetAccessToken, Init, SaveAccessToken } from "./types";
+import { CloseHandler, GetAccessToken, SaveAccessToken } from "./types";
 
 export default async function () {
   const token = await figma.clientStorage.getAsync("token");

@@ -14,8 +14,3 @@ export interface GetAccessToken extends EventHandler {
   name: "GET_ACCESS_TOKEN";
   handler: (storedToken: string) => void;
 }
-
-export interface Init extends EventHandler {
-  name: "Init";
-  handler: () => void;
-}

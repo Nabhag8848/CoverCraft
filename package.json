@@ -4,7 +4,8 @@
     "@create-figma-plugin/ui": "^3.1.0",
     "@create-figma-plugin/utilities": "^3.1.0",
     "graphql": "^16.8.1",
-    "preact": ">=10"
+    "preact": ">=10",
+    "react-icons": "^5.0.1"
   },
   "devDependencies": {
     "@create-figma-plugin/build": "^3.1.0",
