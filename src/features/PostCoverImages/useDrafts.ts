@@ -1,8 +1,11 @@
 import { gql, useQuery } from "@apollo/client";
 
 const GET_DRAFTS = gql`
-  query User($username: String!) {
-    user(username: $username) {
+  query Me {
+    me {
+      username
+      name
+      profilePicture
       publications(first: 50) {
         edges {
           node {
@@ -22,19 +25,17 @@ const GET_DRAFTS = gql`
   }
 `;
 
-export function useDrafts({ username }: { username: string }) {
-  const { loading, error, data } = useQuery(GET_DRAFTS, {
-    variables: { username },
-  });
+export function useDrafts() {
+  const { loading, error, data } = useQuery(GET_DRAFTS);
 
   return { isDraftLoading: loading, isDraftError: error, data };
 }
 
 export function getListOfDrafts(data: any) {
-  const drafts = data.user.publications.edges[0].node.drafts.edges.map(
+  const drafts = data.me.publications.edges[0].node.drafts.edges.map(
     (draft: any) => {
       const value = draft.node;
-      return { id: value.id, title: value.title, slug: value.slug };
+      return { value: value.id, text: value.title };
     }
   );
 

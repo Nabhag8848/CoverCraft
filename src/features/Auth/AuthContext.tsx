@@ -1,4 +1,4 @@
-import { emit, on } from "@create-figma-plugin/utilities";
+import { on } from "@create-figma-plugin/utilities";
 import { createContext, h } from "preact";
 import { PropsWithChildren } from "preact/compat";
 import { StateUpdater, useContext, useState } from "preact/hooks";

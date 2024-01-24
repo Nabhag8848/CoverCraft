@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 
 export interface IUserInfo {
   username: string;
@@ -15,3 +15,9 @@ export const GET_USER_INFO = gql`
     }
   }
 `;
+
+export function useUser() {
+  const { loading, error, data } = useQuery(GET_USER_INFO);
+
+  return { isUserLoading: loading, isUserError: error, user: data };
+}
