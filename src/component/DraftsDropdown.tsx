@@ -1,43 +1,27 @@
 import {
   Bold,
   Dropdown,
-  DropdownOption,
+  DropdownOptionValue,
+  LoadingIndicator,
 } from "@create-figma-plugin/ui";
 import { Fragment, h, JSX } from "preact";
 import { useState } from "preact/hooks";
 import { IoBookSharp } from "react-icons/io5";
+import { getListOfDrafts } from "../features/PostCoverImages/useDrafts";
 
-function DraftsDropdown() {
-  const [value, setValue] = useState<string>("blog-1");
-  const options: Array<DropdownOption> = [
-    {
-      header: "Recents",
-    },
-    {
-      value: "blog-1",
-      text: "Blog 1",
-    },
-    "-",
-    {
-      text: "Blog 2",
-      value: "blog-2",
-    },
-    {
-      text: "Blog 3",
-      value: "blog-3",
-    },
-    {
-      text: "Blog 4",
-      value: "blog-4",
-    },
-  ];
+function DraftsDropdown({ data }) {
+  const [value, setValue] = useState<string | null>(null);
+
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value;
     setValue(newValue);
   }
+  
+  const options: Array<DropdownOptionValue> = getListOfDrafts(data);
+
   return (
     <Fragment>
-      <Bold style={{ marginLeft: "2px" }}> Select Draft</Bold>
+      <Bold style={{ marginLeft: "2px" }}>Draft</Bold>
       <Dropdown
         icon={
           <div style={{ paddingTop: "8px" }}>
@@ -49,6 +33,7 @@ function DraftsDropdown() {
         value={value}
         variant="border"
         style={{ height: "35px", marginTop: "3px" }}
+        placeholder="Select Draft"
       />
     </Fragment>
   );
