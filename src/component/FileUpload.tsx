@@ -9,22 +9,25 @@ import { StateUpdater, useCallback } from "preact/hooks";
 function FileUpload({
   image,
   setImage,
+  setDecodedImage,
 }: {
   image: string;
   setImage: StateUpdater<string>;
+  setDecodedImage: StateUpdater<Uint8Array | null>;
 }) {
-  
   useCallback(
     (window.onmessage = (event) => {
       const pluginEvent = event.data.pluginMessage;
-      const { type, node } = pluginEvent;
+      const { type, node, decoded_node } = pluginEvent;
       switch (type) {
         case "no_node_intended": {
           setImage("");
+          setDecodedImage(null);
           break;
         }
         case "encoded_node": {
           setImage(node);
+          setDecodedImage(decoded_node);
           break;
         }
         default: {

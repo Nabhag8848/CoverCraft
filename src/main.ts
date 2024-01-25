@@ -30,9 +30,11 @@ export default async function () {
         const base64 = `data:image/svg+xml;base64,${figma.base64Encode(
           encoded
         )}`;
+        const base64Decode = encoded;
         figma.ui.postMessage({
           type: "encoded_node",
           node: base64,
+          decoded_node: base64Decode,
         });
       });
       return;

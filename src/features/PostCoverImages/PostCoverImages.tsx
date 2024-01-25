@@ -11,19 +11,21 @@ import {
 import DraftsDropdown from "../../component/DraftsDropdown";
 import { useDrafts } from "./useDrafts";
 import { useState } from "preact/hooks";
+import { useFileUpload } from "../../../hooks/useFileUpload";
 function PostCoverImages() {
   const [image, setImage] = useState("");
   const { data, isDraftError, isDraftLoading } = useDrafts();
   const [option, setOption] = useState<string | null>(null);
-  const disableSetButton = image === "" || option === null;
+  const [decodedImage, setDecodedImage] = useState<Uint8Array | null>(null);
+  const { uploadCoverImage, isImageUploading } = useFileUpload();
+  const disableSetButton =
+    image === "" || option === null || decodedImage === null;
 
   function handleSetCoverImage(
     event: JSX.TargetedMouseEvent<HTMLButtonElement>
   ) {
-
-    if(disableSetButton) return;
-    console.log(image);
-    console.log(option);
+    if (disableSetButton) return;
+    uploadCoverImage(decodedImage);
   }
 
   if (isDraftLoading)
@@ -39,7 +41,11 @@ function PostCoverImages() {
     <div>
       <Stack space="large">
         <Divider />
-        <FileUpload image={image} setImage={setImage} />
+        <FileUpload
+          image={image}
+          setImage={setImage}
+          setDecodedImage={setDecodedImage}
+        />
         <Divider />
         <DraftsDropdown data={data} setOption={setOption} option={option} />
         <Divider />
@@ -49,6 +55,7 @@ function PostCoverImages() {
           style={{ marginTop: "25px" }}
           disabled={disableSetButton}
           secondary={disableSetButton}
+          loading={isImageUploading}
         >
           <Bold>Set as Cover</Bold>
         </Button>
