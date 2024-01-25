@@ -5,18 +5,15 @@ import {
   LoadingIndicator,
 } from "@create-figma-plugin/ui";
 import { Fragment, h, JSX } from "preact";
-import { useState } from "preact/hooks";
 import { IoBookSharp } from "react-icons/io5";
 import { getListOfDrafts } from "../features/PostCoverImages/useDrafts";
 
-function DraftsDropdown({ data }) {
-  const [value, setValue] = useState<string | null>(null);
-
+function DraftsDropdown({ data, option, setOption }) {
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
-    const newValue = event.currentTarget.value;
-    setValue(newValue);
+    const newOption = event.currentTarget.value;
+    setOption(newOption);
   }
-  
+
   const options: Array<DropdownOptionValue> = getListOfDrafts(data);
 
   return (
@@ -30,9 +27,9 @@ function DraftsDropdown({ data }) {
         }
         onChange={handleChange}
         options={options}
-        value={value}
+        value={option}
         variant="border"
-        style={{ height: "35px", marginTop: "3px" }}
+        style={{ height: "35px", marginTop: "10px" }}
         placeholder="Select Draft"
       />
     </Fragment>

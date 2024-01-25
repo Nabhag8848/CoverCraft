@@ -1,6 +1,7 @@
 import { h, JSX } from "preact";
 import FileUpload from "../../component/FileUpload";
 import {
+  Bold,
   Button,
   Divider,
   LoadingIndicator,
@@ -9,8 +10,21 @@ import {
 } from "@create-figma-plugin/ui";
 import DraftsDropdown from "../../component/DraftsDropdown";
 import { useDrafts } from "./useDrafts";
+import { useState } from "preact/hooks";
 function PostCoverImages() {
+  const [image, setImage] = useState("");
   const { data, isDraftError, isDraftLoading } = useDrafts();
+  const [option, setOption] = useState<string | null>(null);
+  const disableSetButton = image === "" || option === null;
+
+  function handleSetCoverImage(
+    event: JSX.TargetedMouseEvent<HTMLButtonElement>
+  ) {
+
+    if(disableSetButton) return;
+    console.log(image);
+    console.log(option);
+  }
 
   if (isDraftLoading)
     return (
@@ -21,23 +35,22 @@ function PostCoverImages() {
   // later handle error
   if (isDraftError) return <h4>Error</h4>;
 
-  function handleSetCoverImage(
-    event: JSX.TargetedMouseEvent<HTMLButtonElement>
-  ) {}
   return (
     <div>
       <Stack space="large">
         <Divider />
-        <FileUpload />
+        <FileUpload image={image} setImage={setImage} />
         <Divider />
-        <DraftsDropdown data={data} />
+        <DraftsDropdown data={data} setOption={setOption} option={option} />
         <Divider />
         <Button
           fullWidth
           onClick={handleSetCoverImage}
-          style={{ marginTop: "20px" }}
+          style={{ marginTop: "25px" }}
+          disabled={disableSetButton}
+          secondary={disableSetButton}
         >
-          Set as Cover
+          <Bold>Set as Cover</Bold>
         </Button>
       </Stack>
     </div>
