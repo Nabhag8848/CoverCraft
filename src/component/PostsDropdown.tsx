@@ -1,19 +1,19 @@
 import { Bold, Dropdown, DropdownOptionValue } from "@create-figma-plugin/ui";
 import { Fragment, h, JSX } from "preact";
 import { IoBookSharp } from "react-icons/io5";
-import { getListOfDrafts } from "../features/PostCoverImages/useDrafts";
+import { getListOfPosts } from "../features/PostCoverImages/usePosts";
 
-function DraftsDropdown({ data, option, setOption }) {
+function PostsDropdown({ data, option, setOption }) {
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newOption = event.currentTarget.value;
     setOption(newOption);
   }
 
-  const options: Array<DropdownOptionValue> = getListOfDrafts(data);
+  const options: Array<DropdownOptionValue> = getListOfPosts(data);
 
   return (
     <Fragment>
-      <Bold style={{ marginLeft: "2px" }}>Draft</Bold>
+      <Bold style={{ marginLeft: "2px" }}>Post</Bold>
       <Dropdown
         icon={
           <div style={{ paddingTop: "8px" }}>
@@ -25,10 +25,10 @@ function DraftsDropdown({ data, option, setOption }) {
         value={option}
         variant="border"
         style={{ height: "35px", marginTop: "10px" }}
-        placeholder="Select Draft"
+        placeholder="Select Post"
       />
     </Fragment>
   );
 }
 
-export default DraftsDropdown;
+export default PostsDropdown;
