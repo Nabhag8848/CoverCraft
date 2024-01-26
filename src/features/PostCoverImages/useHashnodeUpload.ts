@@ -1,4 +1,6 @@
 import { gql, useMutation } from "@apollo/client";
+import { CloseHandler, ErrorHandler } from "../../types";
+import { emit } from "@create-figma-plugin/utilities";
 
 const UPLOAD_COVER_IMAGE = gql`
   mutation UpdatePost($input: UpdatePostInput!) {
@@ -32,8 +34,11 @@ export function useHashnodeUpload() {
       error: isSettingError,
     },
   ] = useMutation(UPLOAD_COVER_IMAGE, {
-    onCompleted(data, clientOptions) {
-      console.log(data, clientOptions);
+    onCompleted() {
+      emit<CloseHandler>("CLOSE");
+    },
+    onError(error) {
+      emit<ErrorHandler>("ERROR", error.message);
     },
   });
 

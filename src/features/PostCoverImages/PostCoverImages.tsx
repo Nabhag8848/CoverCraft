@@ -1,4 +1,4 @@
-import { h, JSX } from "preact";
+import { Fragment, h, JSX } from "preact";
 import FileUpload from "../../component/FileUpload";
 import {
   Bold,
@@ -6,6 +6,7 @@ import {
   Divider,
   LoadingIndicator,
   MiddleAlign,
+  Muted,
   Stack,
 } from "@create-figma-plugin/ui";
 import { useState } from "preact/hooks";
@@ -13,6 +14,8 @@ import { useFileUpload } from "../../../hooks/useFileUpload";
 import { usePosts } from "./usePosts";
 import PostsDropdown from "../../component/PostsDropdown";
 import { useHashnodeUpload } from "./useHashnodeUpload";
+import { emit } from "@create-figma-plugin/utilities";
+import { ErrorHandler } from "../../types";
 function PostCoverImages() {
   const [image, setImage] = useState("");
   const { data, isPostsError, isPostsLoading } = usePosts();
@@ -40,32 +43,35 @@ function PostCoverImages() {
       </MiddleAlign>
     );
   // later handle error
-  if (isPostsError || isSettingError) return <h4>Error</h4>;
+
+  if (isPostsError || isSettingError) {
+    emit<ErrorHandler>("ERROR", "Something went wrong");
+    return <Fragment></Fragment>;
+  }
 
   return (
-    <div>
-      <Stack space="large">
-        <Divider />
-        <FileUpload
-          image={image}
-          setImage={setImage}
-          setDecodedImage={setDecodedImage}
-        />
-        <Divider />
-        <PostsDropdown data={data} setOption={setOption} option={option} />
-        <Divider />
-        <Button
-          fullWidth
-          onClick={handleSetCoverImage}
-          style={{ marginTop: "25px" }}
-          disabled={disableSetButton}
-          secondary={disableSetButton}
-          loading={isImageUploading}
-        >
-          <Bold>Set as Cover</Bold>
-        </Button>
-      </Stack>
-    </div>
+    <Stack space="large">
+      <Divider />
+      <FileUpload
+        image={image}
+        setImage={setImage}
+        setDecodedImage={setDecodedImage}
+      />
+      <PostsDropdown data={data} setOption={setOption} option={option} />
+      <Divider />
+      <Button
+        fullWidth
+        onClick={handleSetCoverImage}
+        style={{ marginTop: "25px" }}
+        disabled={disableSetButton}
+        secondary={disableSetButton}
+        loading={isImageUploading}
+      >
+        <Bold>Set as Cover</Bold>
+      </Button>
+      <Divider />
+      <Muted style={{ marginLeft: "31%" }}>Powered by Hashnode</Muted>
+    </Stack>
   );
 }
 

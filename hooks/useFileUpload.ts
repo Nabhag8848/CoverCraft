@@ -1,6 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 import { uploadCoverImage as uploadCoverImageApi } from "../services/apiStorage";
 import { useHashnodeUpload } from "../src/features/PostCoverImages/useHashnodeUpload";
+import { emit } from "@create-figma-plugin/utilities";
+import { ErrorHandler } from "../src/types";
 
 const SUPABASE_STORAGE_DOMAIN_PATH = `https://jrrpxgtuiarderxironm.supabase.co/storage/v1/object/public/`;
 
@@ -24,7 +26,7 @@ export function useFileUpload(id: string) {
         });
       },
       onError: (error) => {
-        console.error(error);
+        emit<ErrorHandler>("ERROR", error.message);
       },
     }
   );

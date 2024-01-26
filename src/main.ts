@@ -1,10 +1,20 @@
 import { once, showUI, on, emit } from "@create-figma-plugin/utilities";
-import { CloseHandler, GetAccessToken, SaveAccessToken } from "./types";
+import {
+  CloseHandler,
+  ErrorHandler,
+  GetAccessToken,
+  SaveAccessToken,
+} from "./types";
 
 export default async function () {
   const token = await figma.clientStorage.getAsync("token");
   once<CloseHandler>("CLOSE", function () {
     figma.closePlugin();
+    figma.notify("Your Cover image is all set 🎉");
+  });
+  once<ErrorHandler>("ERROR", function (message: string) {
+    figma.closePlugin();
+    figma.notify(message);
   });
   showUI({
     height: 500,
@@ -27,9 +37,7 @@ export default async function () {
       const node = selections[0];
 
       node.exportAsync({ format: "PNG" }).then((encoded) => {
-        const base64 = `data:image/png;base64,${figma.base64Encode(
-          encoded
-        )}`;
+        const base64 = `data:image/png;base64,${figma.base64Encode(encoded)}`;
         const base64Decode = encoded;
         figma.ui.postMessage({
           type: "encoded_node",
