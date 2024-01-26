@@ -4,6 +4,8 @@ import {
   ErrorHandler,
   GetAccessToken,
   SaveAccessToken,
+  InsertInBoard,
+  ErrorNotify,
 } from "./types";
 
 export default async function () {
@@ -16,6 +18,9 @@ export default async function () {
     figma.closePlugin();
     figma.notify(message);
   });
+  once<ErrorNotify>("ERROR_NOTIFY", function (text: string) {
+    figma.notify(text);
+  });
   showUI({
     height: 500,
     width: 350,
@@ -24,6 +29,27 @@ export default async function () {
     await figma.clientStorage.setAsync("token", token);
   });
   emit<GetAccessToken>("GET_ACCESS_TOKEN", token);
+  on<InsertInBoard>("INSERT_IN_BOARD", function (imageUrl: string) {
+    figma.createImageAsync(imageUrl).then(async (image: Image) => {
+      // Create a rectangle that's the same dimensions as the image.
+      const node = figma.createRectangle();
+
+      const { width, height } = await image.getSizeAsync();
+      node.resize(width, height);
+
+      node.fills = [
+        {
+          type: "IMAGE",
+          imageHash: image.hash,
+          scaleMode: "FILL",
+        },
+      ];
+
+      figma.viewport.scrollAndZoomIntoView([node]);
+      figma.notify("Image was successfully inserted in board! 🎉");
+    });
+  });
+
   // select layer / image
   figma.on("selectionchange", function () {
     const selections = figma.currentPage.selection;
@@ -45,7 +71,6 @@ export default async function () {
           decoded_node: base64Decode,
         });
       });
-      return;
     }
   });
 }

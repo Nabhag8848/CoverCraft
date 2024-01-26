@@ -19,3 +19,13 @@ export interface ErrorHandler extends EventHandler {
   name: "ERROR";
   handler: (message: string) => void;
 }
+
+export interface InsertInBoard extends EventHandler {
+  name: "INSERT_IN_BOARD";
+  handler: (text: string) => void;
+}
+
+export interface ErrorNotify extends EventHandler {
+  name: "ERROR_NOTIFY";
+  handler: (text: string) => void;
+}

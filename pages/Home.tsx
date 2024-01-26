@@ -2,12 +2,13 @@ import { Tabs, TabsOption } from "@create-figma-plugin/ui";
 import { h, JSX } from "preact";
 import PostCoverImages from "../src/features/PostCoverImages/PostCoverImages";
 import { useState } from "preact/hooks";
+import SearchCoverImages from "../src/features/SearchCoverImage/SearchCoverImages";
 
 function Home() {
   const [option, setOption] = useState("Cover Image");
   const options: Array<TabsOption> = [
     {
-      children: <div>Search Cover</div>,
+      children: <SearchCoverImages />,
       value: "Search Cover",
     },
     {
