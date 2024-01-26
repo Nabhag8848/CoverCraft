@@ -6,69 +6,70 @@ import {
   LoadingIndicator,
   Textbox,
 } from "@create-figma-plugin/ui";
-import { useEffect, useState } from "preact/hooks";
+import { useState } from "preact/hooks";
 import ImageComponent from "../../component/ImageComponent";
+import { useSearchCoverImage } from "./useSearchCoverImage";
+import { BsSearch } from "react-icons/bs";
+import { useEffect } from "react";
 
 const SearchCoverImages = () => {
   const [query, setQuery] = useState("");
   const [images, setImages] = useState<string[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | undefined>(undefined);
+  const { isSearching, isSearchingError, searchCoverImage } =
+    useSearchCoverImage();
 
-  useEffect(() => {
-    getImages("illustration mountains");
+  useEffect(function () {
+    searchCoverImage("", {
+      onSuccess(data) {
+        setImages(data);
+      },
+    });
   }, []);
-
-  async function getImages(query: string) {
-    setError(undefined);
-    setImages([]);
-    try {
-      setLoading(true);
-      const res = await fetch(`https://lexica.art/api/v1/search?q=${query}`);
-      const data = await res.json();
-
-      console.log(data);
-      if (data == undefined) return;
-
-      let imagesList: string[] = [];
-      data.images.map((image: { src: string }) => {
-        imagesList.push(image.src);
-      });
-
-      setLoading(false);
-      setImages(imagesList);
-    } catch (e) {
-      console.log(e);
-      setError("Something went wrong");
-    }
-  }
 
   return (
     <div>
-      <Columns style={{ marginTop: "20px" }}>
+      <Columns
+        style={{
+          marginTop: "20px",
+        }}
+      >
         <Textbox
           style={{
-            width: "220px",
+            width: "240px",
             height: "35px",
           }}
           onChange={(e) => setQuery(e.currentTarget.value)}
           value={query}
-          placeholder="Enter a query"
+          placeholder="Search for image"
           autofocus
+          variant="border"
+          disabled={isSearching}
+          icon={
+            <div style={{ paddingTop: "8px" }}>
+              <BsSearch />
+            </div>
+          }
         />
-        <div style={{ width: "10px" }}></div>
+        <div style={{ width: "8px" }}></div>
         <Button
           style={{
             height: "35px",
           }}
-          onClick={() => getImages(query)}
+          onClick={() => {
+            searchCoverImage(query, {
+              onSuccess(data) {
+                setImages(data);
+              },
+            });
+            setImages([]);
+          }}
+          disabled={isSearching || query === ""}
         >
           Search
         </Button>
       </Columns>
-
       <div style={{ height: "20px" }}></div>
-      {loading && !error && (
+      {isSearching && !isSearchingError && (
         <div
           style={{
             display: "flex",
@@ -81,7 +82,7 @@ const SearchCoverImages = () => {
           <LoadingIndicator />
         </div>
       )}
-      {error && (
+      {isSearchingError && (
         <div
           style={{
             display: "flex",
@@ -91,7 +92,7 @@ const SearchCoverImages = () => {
             height: "50%",
           }}
         >
-          <p>{error}</p>
+          <p>Error</p>
         </div>
       )}
       <div
@@ -102,7 +103,7 @@ const SearchCoverImages = () => {
           gap: "20px",
         }}
       >
-        {!error &&
+        {(!isSearchingError && !isSearching) &&
           images.map((image) => {
             return <ImageComponent url={image} className={styles.image} />;
           })}
