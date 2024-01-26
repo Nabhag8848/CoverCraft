@@ -1,5 +1,10 @@
 import { once, showUI, on, emit } from "@create-figma-plugin/utilities";
-import { CloseHandler, GetAccessToken, SaveAccessToken } from "./types";
+import {
+  CloseHandler,
+  GetAccessToken,
+  InsertInBoard,
+  SaveAccessToken,
+} from "./types";
 
 export default async function () {
   const token = await figma.clientStorage.getAsync("token");
@@ -13,7 +18,29 @@ export default async function () {
   on<SaveAccessToken>("SAVE_ACCESS_TOKEN", async function (token: string) {
     await figma.clientStorage.setAsync("token", token);
   });
-  emit<GetAccessToken>("GET_ACCESS_TOKEN", token);
+  on<InsertInBoard>("INSERT_IN_BOARD", function (imageUrl: string) {
+    figma.createImageAsync(imageUrl).then(async (image: Image) => {
+      // Create a rectangle that's the same dimensions as the image.
+      const node = figma.createRectangle();
+
+      const { width, height } = await image.getSizeAsync();
+      node.resize(width, height);
+
+      node.fills = [
+        {
+          type: "IMAGE",
+          imageHash: image.hash,
+          scaleMode: "FILL",
+        },
+      ];
+
+      emit<GetAccessToken>("GET_ACCESS_TOKEN", token);
+
+      figma.viewport.scrollAndZoomIntoView([node]);
+      figma.notify("Image was successfully inserted in board! 🎉");
+    });
+  });
+
   // select layer / image
   figma.on("selectionchange", function () {
     const selections = figma.currentPage.selection;

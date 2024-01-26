@@ -9,14 +9,18 @@ import { useState } from "preact/hooks";
 import { IoBookSharp } from "react-icons/io5";
 import { getListOfDrafts } from "../features/PostCoverImages/useDrafts";
 
-function DraftsDropdown({ data }) {
+interface DraftsDropdownProps {
+  data: any;
+}
+
+function DraftsDropdown({ data }: DraftsDropdownProps) {
   const [value, setValue] = useState<string | null>(null);
 
   function handleChange(event: JSX.TargetedEvent<HTMLInputElement>) {
     const newValue = event.currentTarget.value;
     setValue(newValue);
   }
-  
+
   const options: Array<DropdownOptionValue> = getListOfDrafts(data);
 
   return (
