@@ -5,6 +5,7 @@ import {
   GetAccessToken,
   SaveAccessToken,
   InsertInBoard,
+  ErrorNotify,
 } from "./types";
 
 export default async function () {
@@ -16,6 +17,9 @@ export default async function () {
   once<ErrorHandler>("ERROR", function (message: string) {
     figma.closePlugin();
     figma.notify(message);
+  });
+  once<ErrorNotify>("ERROR_NOTIFY", function (text: string) {
+    figma.notify(text);
   });
   showUI({
     height: 500,

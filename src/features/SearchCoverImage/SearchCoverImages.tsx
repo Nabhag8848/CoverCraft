@@ -11,6 +11,8 @@ import ImageComponent from "../../component/ImageComponent";
 import { useSearchCoverImage } from "./useSearchCoverImage";
 import { BsSearch } from "react-icons/bs";
 import { useEffect } from "react";
+import { ErrorNotify } from "../../types";
+import { emit } from "@create-figma-plugin/utilities";
 
 const SearchCoverImages = () => {
   const [query, setQuery] = useState("");
@@ -22,6 +24,9 @@ const SearchCoverImages = () => {
     searchCoverImage("", {
       onSuccess(data) {
         setImages(data);
+      },
+      onError() {
+        emit<ErrorNotify>("ERROR_NOTIFY", "Error while Searching");
       },
     });
   }, []);
@@ -59,6 +64,9 @@ const SearchCoverImages = () => {
             searchCoverImage(query, {
               onSuccess(data) {
                 setImages(data);
+              },
+              onError() {
+                emit<ErrorNotify>("ERROR_NOTIFY", "Error while Searching");
               },
             });
             setImages([]);
@@ -103,7 +111,8 @@ const SearchCoverImages = () => {
           gap: "20px",
         }}
       >
-        {(!isSearchingError && !isSearching) &&
+        {!isSearchingError &&
+          !isSearching &&
           images.map((image) => {
             return <ImageComponent url={image} className={styles.image} />;
           })}
