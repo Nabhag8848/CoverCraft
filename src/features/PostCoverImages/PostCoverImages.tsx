@@ -1,4 +1,4 @@
-import { h, JSX } from "preact";
+import { Fragment, h, JSX } from "preact";
 import FileUpload from "../../component/FileUpload";
 import {
   Bold,
@@ -14,6 +14,8 @@ import { useFileUpload } from "../../../hooks/useFileUpload";
 import { usePosts } from "./usePosts";
 import PostsDropdown from "../../component/PostsDropdown";
 import { useHashnodeUpload } from "./useHashnodeUpload";
+import { emit } from "@create-figma-plugin/utilities";
+import { ErrorHandler } from "../../types";
 function PostCoverImages() {
   const [image, setImage] = useState("");
   const { data, isPostsError, isPostsLoading } = usePosts();
@@ -41,7 +43,11 @@ function PostCoverImages() {
       </MiddleAlign>
     );
   // later handle error
-  if (isPostsError || isSettingError) return <h4>Error</h4>;
+
+  if (isPostsError || isSettingError) {
+    emit<ErrorHandler>("ERROR", "Something went wrong");
+    return <Fragment></Fragment>;
+  }
 
   return (
     <Stack space="large">
