@@ -26,8 +26,8 @@ export default async function () {
     if (selections.length === 1) {
       const node = selections[0];
 
-      node.exportAsync({ format: "SVG" }).then((encoded) => {
-        const base64 = `data:image/svg+xml;base64,${figma.base64Encode(
+      node.exportAsync({ format: "PNG" }).then((encoded) => {
+        const base64 = `data:image/png;base64,${figma.base64Encode(
           encoded
         )}`;
         const base64Decode = encoded;

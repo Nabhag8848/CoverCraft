@@ -8,16 +8,21 @@ import {
   MiddleAlign,
   Stack,
 } from "@create-figma-plugin/ui";
-import DraftsDropdown from "../../component/DraftsDropdown";
-import { useDrafts } from "./useDrafts";
 import { useState } from "preact/hooks";
 import { useFileUpload } from "../../../hooks/useFileUpload";
+import { usePosts } from "./usePosts";
+import PostsDropdown from "../../component/PostsDropdown";
+import { useHashnodeUpload } from "./useHashnodeUpload";
 function PostCoverImages() {
   const [image, setImage] = useState("");
-  const { data, isDraftError, isDraftLoading } = useDrafts();
+  const { data, isPostsError, isPostsLoading } = usePosts();
   const [option, setOption] = useState<string | null>(null);
   const [decodedImage, setDecodedImage] = useState<Uint8Array | null>(null);
-  const { uploadCoverImage, isImageUploading } = useFileUpload();
+  const { uploadCoverImage, isImageUploading } = useFileUpload(
+    option as string
+  );
+  const { isSettingError, isSettingImageLoading } = useHashnodeUpload();
+
   const disableSetButton =
     image === "" || option === null || decodedImage === null;
 
@@ -28,14 +33,14 @@ function PostCoverImages() {
     uploadCoverImage(decodedImage);
   }
 
-  if (isDraftLoading)
+  if (isPostsLoading || isSettingImageLoading)
     return (
       <MiddleAlign>
         <LoadingIndicator />
       </MiddleAlign>
     );
   // later handle error
-  if (isDraftError) return <h4>Error</h4>;
+  if (isPostsError || isSettingError) return <h4>Error</h4>;
 
   return (
     <div>
@@ -47,7 +52,7 @@ function PostCoverImages() {
           setDecodedImage={setDecodedImage}
         />
         <Divider />
-        <DraftsDropdown data={data} setOption={setOption} option={option} />
+        <PostsDropdown data={data} setOption={setOption} option={option} />
         <Divider />
         <Button
           fullWidth
