@@ -1,4 +1,4 @@
-import { h  } from "preact";
+import { h } from "preact";
 import styles from "./search_style.css";
 import {
   Button,
