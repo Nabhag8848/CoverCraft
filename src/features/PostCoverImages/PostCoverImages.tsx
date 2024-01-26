@@ -6,6 +6,7 @@ import {
   Divider,
   LoadingIndicator,
   MiddleAlign,
+  Muted,
   Stack,
 } from "@create-figma-plugin/ui";
 import { useState } from "preact/hooks";
@@ -43,29 +44,28 @@ function PostCoverImages() {
   if (isPostsError || isSettingError) return <h4>Error</h4>;
 
   return (
-    <div>
-      <Stack space="large">
-        <Divider />
-        <FileUpload
-          image={image}
-          setImage={setImage}
-          setDecodedImage={setDecodedImage}
-        />
-        <Divider />
-        <PostsDropdown data={data} setOption={setOption} option={option} />
-        <Divider />
-        <Button
-          fullWidth
-          onClick={handleSetCoverImage}
-          style={{ marginTop: "25px" }}
-          disabled={disableSetButton}
-          secondary={disableSetButton}
-          loading={isImageUploading}
-        >
-          <Bold>Set as Cover</Bold>
-        </Button>
-      </Stack>
-    </div>
+    <Stack space="large">
+      <Divider />
+      <FileUpload
+        image={image}
+        setImage={setImage}
+        setDecodedImage={setDecodedImage}
+      />
+      <PostsDropdown data={data} setOption={setOption} option={option} />
+      <Divider />
+      <Button
+        fullWidth
+        onClick={handleSetCoverImage}
+        style={{ marginTop: "25px" }}
+        disabled={disableSetButton}
+        secondary={disableSetButton}
+        loading={isImageUploading}
+      >
+        <Bold>Set as Cover</Bold>
+      </Button>
+      <Divider />
+      <Muted style={{ marginLeft: "31%" }}>Powered by Hashnode</Muted>
+    </Stack>
   );
 }
 

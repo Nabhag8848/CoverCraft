@@ -4,7 +4,7 @@ import PostCoverImages from "../src/features/PostCoverImages/PostCoverImages";
 import { useState } from "preact/hooks";
 
 function Home() {
-  const [option, setOption] = useState("Set Cover");
+  const [option, setOption] = useState("Cover Image");
   const options: Array<TabsOption> = [
     {
       children: <div>Search Cover</div>,
@@ -12,7 +12,7 @@ function Home() {
     },
     {
       children: <PostCoverImages />,
-      value: "Set Cover",
+      value: "Cover Image",
     },
     {
       children: <div>History</div>,
@@ -23,11 +23,7 @@ function Home() {
     const newOption = event.currentTarget.value;
     setOption(newOption);
   }
-  return (
-    <div>
-      <Tabs onChange={handleChange} options={options} value={option} />
-    </div>
-  );
+  return <Tabs onChange={handleChange} options={options} value={option} />;
 }
 
 export default Home;
