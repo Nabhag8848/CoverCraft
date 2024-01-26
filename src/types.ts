@@ -15,6 +15,11 @@ export interface GetAccessToken extends EventHandler {
   handler: (storedToken: string) => void;
 }
 
+export interface ErrorHandler extends EventHandler {
+  name: "ERROR";
+  handler: (message: string) => void;
+}
+
 export interface InsertInBoard extends EventHandler {
   name: "INSERT_IN_BOARD";
   handler: (text: string) => void;

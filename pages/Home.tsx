@@ -5,7 +5,7 @@ import { useState } from "preact/hooks";
 import SearchCoverImages from "../src/features/SearchCoverImage/SearchCoverImages";
 
 function Home() {
-  const [option, setOption] = useState("Set Cover");
+  const [option, setOption] = useState("Cover Image");
   const options: Array<TabsOption> = [
     {
       children: <SearchCoverImages />,
@@ -13,7 +13,7 @@ function Home() {
     },
     {
       children: <PostCoverImages />,
-      value: "Set Cover",
+      value: "Cover Image",
     },
     {
       children: <div>History</div>,
@@ -24,16 +24,7 @@ function Home() {
     const newOption = event.currentTarget.value;
     setOption(newOption);
   }
-  return (
-    <div>
-      <Tabs
-        style={{ position: "fixed", zIndex: 1000 }}
-        onChange={handleChange}
-        options={options}
-        value={option}
-      />
-    </div>
-  );
+  return <Tabs onChange={handleChange} options={options} value={option} />;
 }
 
 export default Home;
