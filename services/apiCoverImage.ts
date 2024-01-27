@@ -1,5 +1,6 @@
 export async function getCoverImages(query) {
   const searchQuery = query === "" ? "illustration mountains" : query;
+
   const res = await fetch(`https://lexica.art/api/v1/search?q=${searchQuery}`);
   const data = await res.json();
 

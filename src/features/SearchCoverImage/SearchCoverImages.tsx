@@ -46,7 +46,6 @@ const SearchCoverImages = () => {
           onChange={(e) => setQuery(e.currentTarget.value)}
           value={query}
           placeholder="Search for image"
-          autofocus
           variant="border"
           disabled={isSearching}
           icon={
