@@ -1,0 +1,8 @@
+{
+  "api": "1.0.0",
+  "editorType": ["figma"],
+  "id": "fb6e4e74-f99d-41b6-96da-2486e9aafea8",
+  "name": "CoverCraft",
+  "main": "build/main.js",
+  "ui": "build/ui.js"
+}
