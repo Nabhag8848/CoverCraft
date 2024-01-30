@@ -1,13 +1,21 @@
 import { Fragment, h } from "preact";
+import { LoadingIndicator, MiddleAlign } from "@create-figma-plugin/ui";
+import { useState } from "react";
+import { on } from "@create-figma-plugin/utilities";
+
 import Auth from "../src/features/Auth/Auth";
 import { useAuth } from "../src/features/Auth/AuthContext";
 import Home from "./Home";
-import { useState } from "react";
-import { LoadingIndicator, MiddleAlign } from "@create-figma-plugin/ui";
+import { DeleteAccessToken } from "../src/types";
 
 function PluginLayout() {
   const [spinner, setSpinner] = useState(true);
   const { isAuthenticated } = useAuth();
+
+  on<DeleteAccessToken>("DELETE_ACCESS_TOKEN", () => {
+    return <Auth />;
+  });
+
   if (spinner) {
     setTimeout(() => {
       setSpinner(false);
@@ -18,6 +26,7 @@ function PluginLayout() {
       </MiddleAlign>
     );
   }
+
   return <Fragment>{isAuthenticated ? <Home /> : <Auth />}</Fragment>;
 }
 

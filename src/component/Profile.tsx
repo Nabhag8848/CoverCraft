@@ -1,30 +1,44 @@
 import { h, Fragment } from "preact";
-import { useState } from "preact/hooks";
-import MenuOptions from "./MenuOptions";
 
-function Profile() {
-  const [showMenu, setShowMenu] = useState(false);
-  const onClickHandler = () => setShowMenu((showMenu) => !showMenu);
+import MenuOptions from "./MenuOptions";
+import { useUser } from "../features/Auth/useUser";
+
+function Profile({ showMenu, setShowMenu }) {
+  const { isUserError, isUserLoading, user } = useUser();
+
+  const onClickHandler = (event) => {
+    setShowMenu((showMenu) => !showMenu);
+    event.stopPropagation();
+  };
+
+  if (isUserError || isUserLoading) return <Fragment> </Fragment>;
+
+  const {
+    profilePicture,
+    name: fullName,
+  }: { profilePicture?: string; name: string } = user.me;
+  const name = fullName.replace(/\s/, "+");
   return (
     <Fragment>
-      <button
+      <img
+        src={
+          profilePicture
+            ? profilePicture
+            : `https://ui-avatars.com/api/?name=${name}`
+        }
         style={{
-          display: "inline-block",
           position: "absolute",
-          marginLeft: "78%",
-          marginBottom: "30px",
+          right: "5vw",
+          top: "0vh",
+          borderRadius: "50%",
+          height: "35px",
+          width: "35px",
+          zIndex: 1000,
         }}
-        onClick={onClickHandler}
-      >
-        <img
-          src="https://ui-avatars.com/api/?name=Nabhag+Motivaras"
-          style={{
-            borderRadius: "50%",
-            height: "35px",
-            width: "35px",
-          }}
-        />
-      </button>
+        onClick={(event) => {
+          onClickHandler(event);
+        }}
+      />
       {showMenu && <MenuOptions />}
     </Fragment>
   );
