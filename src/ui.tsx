@@ -5,9 +5,10 @@ import CustomApolloClient from "./context/CustomApolloClient";
 import { AuthProvider } from "./features/Auth/AuthContext";
 import CustomQueryProvider from "./context/CustomQueryProvider";
 
+import styles from "./ui.css";
 function Plugin() {
   return (
-    <Container space="medium">
+    <Container space="medium" style={styles.main}>
       <VerticalSpace space="large" />
       <CustomQueryProvider>
         <AuthProvider>

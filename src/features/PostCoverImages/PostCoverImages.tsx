@@ -15,12 +15,15 @@ import { usePosts } from "./usePosts";
 import PostsDropdown from "../../component/PostsDropdown";
 import { useHashnodeUpload } from "./useHashnodeUpload";
 import { emit } from "@create-figma-plugin/utilities";
-import { ErrorHandler } from "../../types";
+import { DeleteAccessToken, ErrorHandler, ShowMessage } from "../../types";
+import { useAuth } from "../Auth/AuthContext";
 function PostCoverImages() {
   const [image, setImage] = useState("");
   const { data, isPostsError, isPostsLoading } = usePosts();
   const [option, setOption] = useState<string | null>(null);
   const [decodedImage, setDecodedImage] = useState<Uint8Array | null>(null);
+  const { setToken } = useAuth();
+
   const { uploadCoverImage, isImageUploading } = useFileUpload(
     option as string
   );
@@ -42,10 +45,23 @@ function PostCoverImages() {
         <LoadingIndicator />
       </MiddleAlign>
     );
-  // later handle error
 
   if (isPostsError || isSettingError) {
-    emit<ErrorHandler>("ERROR", "Something went wrong");
+    if (isPostsError?.graphQLErrors[0].extensions.code === "UNAUTHENTICATED") {
+      emit<DeleteAccessToken>("DELETE_ACCESS_TOKEN");
+      emit<ShowMessage>(
+        "SHOW_MESSAGE",
+        "Invalid Access Token, please validate again!"
+      );
+      setToken("");
+      return <div></div>;
+    }
+    
+    console.log("Error", isPostsError?.graphQLErrors, isSettingError);
+    emit<ShowMessage>(
+      "SHOW_MESSAGE",
+      "We are facing some issues, please try again later!"
+    );
     return <Fragment></Fragment>;
   }
 
