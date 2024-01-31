@@ -1,4 +1,4 @@
-import { Button, Textbox } from "@create-figma-plugin/ui";
+import { Button, Muted, Textbox } from "@create-figma-plugin/ui";
 import { Fragment, h } from "preact";
 import { useState } from "preact/hooks";
 import type { JSX } from "preact";
@@ -26,10 +26,10 @@ function Auth() {
   return (
     <Fragment>
       <div className={styles.authContainer}>
-        <h1 className={styles.heading}>Let's get Started</h1>
+        <h1 className={styles.heading}>Figma x Hashnode</h1>
         <p className={styles.subScript}>
-          Effortlessly update your <strong>Hashnode</strong> post images <br />
-          directly from Figma.
+           Seamlessly set your post <strong> Cover Images </strong>
+          <br />
         </p>
         <div className={styles.authSvg}>
           <AuthSvg />
@@ -39,7 +39,7 @@ function Auth() {
           password
           value={value}
           variant="border"
-          placeholder="Paste Your Access Token"
+          placeholder="Enter Your Access Token"
         />
         <div style={{ height: "10px" }}></div>
         <Button fullWidth onClick={handleClick}>
@@ -55,6 +55,7 @@ function Auth() {
         >
           Create Access Token
         </p>
+        <Muted style={{ marginLeft: "31%", marginTop: "30px" }}>Powered by Hashnode</Muted>
       </div>
     </Fragment>
   );

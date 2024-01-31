@@ -15,7 +15,7 @@ import { usePosts } from "./usePosts";
 import PostsDropdown from "../../component/PostsDropdown";
 import { useHashnodeUpload } from "./useHashnodeUpload";
 import { emit } from "@create-figma-plugin/utilities";
-import { DeleteAccessToken, ErrorHandler, ShowMessage } from "../../types";
+import { DeleteAccessToken, ShowMessage } from "../../types";
 import { useAuth } from "../Auth/AuthContext";
 function PostCoverImages() {
   const [image, setImage] = useState("");
@@ -51,12 +51,12 @@ function PostCoverImages() {
       emit<DeleteAccessToken>("DELETE_ACCESS_TOKEN");
       emit<ShowMessage>(
         "SHOW_MESSAGE",
-        "Invalid Access Token, please validate again!"
+        "⛔️ Invalid Access Token, please validate again!"
       );
       setToken("");
-      return <div></div>;
+      return <Fragment></Fragment>;
     }
-    
+
     console.log("Error", isPostsError?.graphQLErrors, isSettingError);
     emit<ShowMessage>(
       "SHOW_MESSAGE",

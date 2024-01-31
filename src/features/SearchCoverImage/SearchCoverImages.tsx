@@ -4,6 +4,7 @@ import {
   Button,
   Columns,
   LoadingIndicator,
+  Muted,
   Textbox,
 } from "@create-figma-plugin/ui";
 import { useState } from "preact/hooks";
@@ -26,7 +27,10 @@ const SearchCoverImages = () => {
         setImages(data);
       },
       onError() {
-        emit<ErrorNotify>("ERROR_NOTIFY", "Error while Searching");
+        emit<ErrorNotify>(
+          "ERROR_NOTIFY",
+          "Your search limit exceeded, try again in a minute!"
+        );
       },
     });
   }, []);
@@ -65,10 +69,14 @@ const SearchCoverImages = () => {
                 setImages(data);
               },
               onError() {
-                emit<ErrorNotify>("ERROR_NOTIFY", "Error while Searching");
+                emit<ErrorNotify>(
+                  "ERROR_NOTIFY",
+                  "Your search limit exceeded, try again in a minute!"
+                );
               },
             });
             setImages([]);
+            setQuery("");
           }}
           disabled={isSearching || query === ""}
         >
@@ -99,7 +107,7 @@ const SearchCoverImages = () => {
             height: "50%",
           }}
         >
-          <p>Error</p>
+          <Muted>Your search limit exceeded, try again in a minute!</Muted>
         </div>
       )}
       <div

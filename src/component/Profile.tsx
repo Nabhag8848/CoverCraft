@@ -28,11 +28,11 @@ function Profile({ showMenu, setShowMenu }) {
         }
         style={{
           position: "absolute",
-          right: "5vw",
-          top: "0vh",
+          right: "1.5vw",
+          top: "-1vh",
           borderRadius: "50%",
-          height: "35px",
-          width: "35px",
+          height: "38px",
+          width: "38px",
           zIndex: 1000,
         }}
         onClick={(event) => {
