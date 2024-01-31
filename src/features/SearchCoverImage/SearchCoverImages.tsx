@@ -7,11 +7,10 @@ import {
   Muted,
   Textbox,
 } from "@create-figma-plugin/ui";
-import { useState } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import ImageComponent from "../../component/ImageComponent";
 import { useSearchCoverImage } from "./useSearchCoverImage";
 import { BsSearch } from "react-icons/bs";
-import { useEffect } from "react";
 import { ErrorNotify } from "../../types";
 import { emit } from "@create-figma-plugin/utilities";
 

@@ -1,10 +1,10 @@
 import { Fragment, h } from "preact";
 import { LoadingIndicator, MiddleAlign } from "@create-figma-plugin/ui";
-import { useState } from "react";
 
 import Auth from "../src/features/Auth/Auth";
 import { useAuth } from "../src/features/Auth/AuthContext";
 import Home from "./Home";
+import { useState } from "preact/hooks";
 
 function PluginLayout() {
   const [spinner, setSpinner] = useState(true);

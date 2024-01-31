@@ -55,7 +55,7 @@ export default async function () {
       ];
 
       figma.viewport.scrollAndZoomIntoView([node]);
-      figma.notify("Image was successfully inserted in board! 🎉");
+      figma.notify("Image successfully inserted! 🎉");
     });
   });
 
