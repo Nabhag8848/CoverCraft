@@ -30,7 +30,7 @@ export default async function () {
   on<SaveAccessToken>("SAVE_ACCESS_TOKEN", async function (token: string) {
     await figma.clientStorage.setAsync("token", token);
   });
-  on<DeleteAccessToken>("DELETE_ACCESS_TOKEN", async function () {
+  on<DeleteAccessToken>("DELETE_ACCESS_TOKEN", async function ()  {
     await figma.clientStorage.deleteAsync("token");
   });
   on<ShowMessage>("SHOW_MESSAGE", async function (message: string) {

@@ -11,11 +11,7 @@ import { DeleteAccessToken } from "../src/types";
 function PluginLayout() {
   const [spinner, setSpinner] = useState(true);
   const { isAuthenticated } = useAuth();
-
-  on<DeleteAccessToken>("DELETE_ACCESS_TOKEN", () => {
-    return <Auth />;
-  });
-
+  
   if (spinner) {
     setTimeout(() => {
       setSpinner(false);

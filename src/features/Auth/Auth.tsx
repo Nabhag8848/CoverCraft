@@ -1,4 +1,4 @@
-import { Button,  Textbox } from "@create-figma-plugin/ui";
+import { Button, Textbox } from "@create-figma-plugin/ui";
 import { Fragment, h } from "preact";
 import { useState } from "preact/hooks";
 import type { JSX } from "preact";
@@ -53,7 +53,7 @@ function Auth() {
           }}
           className={styles.getLinkNow}
         >
-          Create one now
+          Create Access Token
         </p>
       </div>
     </Fragment>
