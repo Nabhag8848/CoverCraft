@@ -29,3 +29,13 @@ export interface ErrorNotify extends EventHandler {
   name: "ERROR_NOTIFY";
   handler: (text: string) => void;
 }
+
+export interface DeleteAccessToken extends EventHandler {
+  name: "DELETE_ACCESS_TOKEN";
+  handler: () => void;
+}
+
+export interface ShowMessage extends EventHandler {
+  name: "SHOW_MESSAGE";
+  handler: (message: string) => void;
+}

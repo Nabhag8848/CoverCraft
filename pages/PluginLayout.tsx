@@ -1,13 +1,15 @@
 import { Fragment, h } from "preact";
+import { LoadingIndicator, MiddleAlign } from "@create-figma-plugin/ui";
+
 import Auth from "../src/features/Auth/Auth";
 import { useAuth } from "../src/features/Auth/AuthContext";
 import Home from "./Home";
-import { useState } from "react";
-import { LoadingIndicator, MiddleAlign } from "@create-figma-plugin/ui";
+import { useState } from "preact/hooks";
 
 function PluginLayout() {
   const [spinner, setSpinner] = useState(true);
   const { isAuthenticated } = useAuth();
+
   if (spinner) {
     setTimeout(() => {
       setSpinner(false);
@@ -18,6 +20,7 @@ function PluginLayout() {
       </MiddleAlign>
     );
   }
+
   return <Fragment>{isAuthenticated ? <Home /> : <Auth />}</Fragment>;
 }
 

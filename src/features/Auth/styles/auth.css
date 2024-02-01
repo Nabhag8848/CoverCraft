@@ -1,0 +1,38 @@
+.authContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10vh;
+  width: 100%;
+}
+
+.authSvg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preGetLinkNow {
+  text-align: center;
+  color: var(--figma-color-text-secondary);
+}
+.getLinkNow {
+  text-align: center;
+  color: var(--figma-color-text-brand);
+  cursor: pointer;
+}
+.getLinkNow:hover {
+  color: var(--figma-color-text-brand);
+  text-decoration: underline;
+  opacity: 0.8;
+}
+
+.heading {
+  font-weight: 600;
+  text-align: center;
+}
+
+.subScript {
+  margin-top: 10px;
+  text-align: center;
+  color: var(--figma-color-text-secondary);
+}

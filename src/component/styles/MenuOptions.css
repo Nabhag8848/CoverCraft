@@ -1,0 +1,38 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+.dropDown {
+  border-radius: 6px;
+  position: absolute;
+  right: 6vw;
+  top: 8vh;
+  height: 21vh;
+  width: 30vh;
+  background-color: var(--figma-color-bg);
+  box-shadow: 0px 0px 10px 0px var(--figma-color-border-disabled
+);
+  z-index: 100;
+}
+
+.dropDownItem {
+  height: 7vh;
+  padding-left: 10px;
+  padding-right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  gap: 10px;
+}
+
+.dropDownItem:hover {
+  background-color: var(--figma-color-bg-secondary);
+  cursor: pointer;
+}
+
+.dropDownItem:hover:nth-child(3) {
+  border-radius: 0px 0px 6px 6px;
+}
+.dropDownItem:hover:nth-child(1) {
+  border-radius: 6px 6px 0px 0px;
+}
