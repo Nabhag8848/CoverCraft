@@ -51,7 +51,7 @@ function FileUpload({
             style={{ marginTop: "50px", marginBottom: "50px" }}
           >
             <Text align="center">
-              <Muted>Select an Cover Image</Muted>
+              <Muted>Select a Cover Image</Muted>
             </Text>
           </Stack>
         </FileUploadDropzone>
