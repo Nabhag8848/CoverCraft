@@ -12,7 +12,6 @@ import { useAuth } from "../features/Auth/AuthContext";
 function MenuOptions() {
   const { setToken } = useAuth();
 
-
   return (
     <div class={styles.dropDown}>
       <p
@@ -31,7 +30,7 @@ function MenuOptions() {
       <p
         onClick={() => {
           // TODO: Add link to plugin page
-          window.open("https://www.google.com", "_blank");
+          window.open("https://cover-craft.vercel.app", "_blank");
         }}
         class={styles.dropDownItem}
       >
