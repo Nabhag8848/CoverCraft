@@ -18,7 +18,11 @@ function MenuOptions() {
         class={styles.dropDownItem}
         onClick={() => {
           //TODO: Update Tweet Message
-          const tweetMessage = "Check out this awesome Figma plugin!";
+          const tweetMessage = "Check out CoverCraft - @figma x @hashnode by @NabhagMotivaras and @AsterJoules" 
+          + "%0a%0a" + "Seamlessly Set Cover Images from Figma to Hashnode." + "%0a" + 
+          "Say Goodbye to downloads, naming and Focus on craft Cover Images with zero hassle." + "%0a%0a"
+          + "Website: https://cover-craft.vercel.app/" + "%0a%0a" + "https://www.figma.com/community/plugin/1333733891388229126";
+
           window.open(
             `https://twitter.com/intent/tweet?text=${tweetMessage}`,
             "_blank"
