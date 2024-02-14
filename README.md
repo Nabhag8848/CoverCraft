@@ -1,4 +1,63 @@
-# Preact Rectangles
+# CoverCraft - Figma x Hashnode
+
+## Overview
+Are you creating cover images for your Hashnode Post ? Constantly downloading, naming, renaming files and switching platforms just to ensure your cover image looks perfect. We've been there, and we understand your frustration.
+
+
+
+But fret not, because CoverCraft is here to save the day! Say goodbye to all the hassle and frustration. With CoverCraft, certainly no more platform switching.
+
+
+
+Imagine being able to craft your cover images in Figma and seamlessly set them on your Hashnode blog posts with just a few clicks. That's the power of CoverCraft - simplifying your workflow and allowing you to focus on what truly matters: crafting your cover.
+
+<div align="center"> <a href="https://www.figma.com/community/plugin/1333733891388229126/"> <img src="https://gist.githubusercontent.com/cxmeel/0dbc95191f239b631c3874f4ccf114e2/raw/figma_purple.svg" alt="Get Plugin" height="60" /> </a>
+<a href="https://twitter.com/_CoverCraft"><img src="https://gist.githubusercontent.com/cxmeel/0dbc95191f239b631c3874f4ccf114e2/raw/twitter_legacy.svg" alt="Twitter" height="60"/></a></div>
+
+## Demo Video
+
+<div align="center">
+      <a href="https://www.youtube.com/watch?v=8emDk72BMaI">
+         <img src="https://github.com/Nabhag8848/CoverCraft/assets/65061890/003be2d1-d2d7-4f38-a5f0-26d0c942855c" >
+      </a>
+</div>
+
+
+
+
+## Features
+
+
+Firstly, To Unlock the full potential of CoverCraft you need access token. Don't have a token yet? No worries – [create access token](https://hashnode.com/settings/developer)
+
+
+
+### 1) Set Cover Images
+
+
+![ProductImage1](https://github.com/Nabhag8848/CoverCraft/assets/65061890/599b06fb-36ee-4be0-bbcd-23a6de7e90b3)
+
+
+
+While plugin is open, Select image or frame containing your cover image. Next, choose the post in which you want to set the selected image as the cover, currently we support published post.
+Finally, Click Set as Cover to apply the selected image or frame as the cover for the chosen post.
+
+### 2) Generate your Imagination
+
+![ProductImage](https://github.com/Nabhag8848/CoverCraft/assets/65061890/07d8f26e-0723-4c49-8772-394a7fbd1894)
+
+We discovered that users often struggled with selecting the perfect background image. To address this, Introducing Lexica AI into plugin to Generate Images from Prompt. Search for Background Images based on your imagination.
+Open plugin and run in file where you aim to build Cover Image.
+Navigate to the Search Cover Tab, Enter your imaginative prompt to initiate the Search. Browse through the generated images and select the one that resonates with your vision.
+Witness the magic by clicking on image and make your cover. Once your newly created cover image is ready, set without ever leaving Figma.
+
+
+### 3) Dark and Light Mode Support
+
+![ProductImage2](https://github.com/Nabhag8848/CoverCraft/assets/65061890/dcff69b3-8477-4f32-be7b-1db74fdd1c64)
+
+Our plugin seamlessly integrates with Figma's preference theme, offering support for both dark and light modes. This means that regardless of your chosen theme in Figma, our plugin will automatically adjust its appearance to match.
+This ensures a consistent and comfortable user experience. If preferred working theme is dark, our plugin will automatically detect and switch to dark mode. Conversely, if you opt for a light theme, the plugin will effortlessly transition to light mode.
 
 ## Development guide
 
